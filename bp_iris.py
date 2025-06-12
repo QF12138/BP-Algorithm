@@ -180,7 +180,7 @@ def train(train_data, l_rate, epochs, n_hidden, val_data):
     for epoch in range(epochs):  # 训练epochs个回合
         for row in train_data:
             # 前馈计算
-            _ = forward_propagate(network, row)
+            _ = forward_propagate(network, row[:-1])
             # 处理一下类标，用于计算误差
             actual_label = [0 for i in range(n_outputs)]
             actual_label[row[-1]] = 1
@@ -238,7 +238,7 @@ def predict(network, row):
     :param row: 一个数据样本
     :return: 预测结果
     """
-    outputs = forward_propagate(network, row)
+    outputs = forward_propagate(network, row[:-1])
     return outputs.index(max(outputs))
 
 
